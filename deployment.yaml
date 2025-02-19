@@ -15,7 +15,7 @@ spec:
         app: rohanlearning
     spec:
       containers:
-        - name: Test
+        - name: test
           image: 274127640471.dkr.ecr.us-east-2.amazonaws.com/testrepo:1.2
           imagePullPolicy: Always
           ports:
