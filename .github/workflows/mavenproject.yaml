@@ -60,7 +60,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           
-          sed -i "s|image: .*|image: $REGISTRY/$REPOSITORY:${{ github.sha }}|" ./deployment.yaml
+          sed -i "s|image: .*|image: $ECR_REGISTRY/$REPOSITORY:${{ github.sha }}|" ./deployment.yaml
           
 
       - name: Deploy to EKS
