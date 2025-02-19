@@ -2,7 +2,7 @@ name: Build with Maven
 
 env:
     REPOSITORY: testrepo
-    IMAGE_TAG: 1.2
+    IMAGE_TAG: ${{ github.sha }}
     AWS_REGION: 'us-east-1'
     KS_CLUSTER_NAME: 'my-eks-cluster3'
 on:
@@ -53,6 +53,14 @@ jobs:
         
       - name: Update kube config
         run: aws eks update-kubeconfig --name $KS_CLUSTER_NAME --region $AWS_REGION
+
+        # Update the Kubernetes deployment file with the latest image
+      - name: Update Kubernetes deployment file with new image
+        env:
+         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+         sed -i "s|image: .*|image: $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}|" ./deployment.yaml
+         
 
       - name: Deploy to EKS
         run: |
