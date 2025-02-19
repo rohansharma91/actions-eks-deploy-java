@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: test
-          image: 767397705569.dkr.ecr.us-east-1.amazonaws.com/testrepo:$IMAGE_TAG
+          image: 767397705569.dkr.ecr.us-east-1.amazonaws.com/testrepo:1.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
